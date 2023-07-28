@@ -1,11 +1,15 @@
 import { argv } from "node:process";
-import { writeFileSync } from "node:fs";
 import { JSDOM } from "jsdom";
 
 import open from "./utils/open.js";
 
-const url = new URL(argv[2]);
+const urlString = argv[2];
+if (!urlString) {
+	console.error("Please provide a valid gogoanime url");
+	process.exit(1);
+}
 
+const url = new URL(urlString);
 const gogoanimeDomain = url.origin;
 const animeName = url.pathname.match(/category\/(.*)/)[1];
 
@@ -27,10 +31,10 @@ const episodeLinks = new Array(endingEpisode - startingEpisode + 1).fill("").map
 });
 
 const episodeDownloadLinks = new Array(endingEpisode - startingEpisode + 1);
+console.info(`Found ${episodeLinks.length} episodes`);
 
 for (let index = 0; index < episodeLinks.length; index++) {
 	const episodeLink = episodeLinks[index];
-
 	console.info("Fetching episode link: " + episodeLink);
 
 	const episodePage = await fetch(episodeLink);
