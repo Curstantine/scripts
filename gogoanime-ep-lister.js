@@ -1,5 +1,5 @@
-import { argv } from "node:process";
 import { JSDOM } from "jsdom";
+import { argv } from "node:process";
 
 import open from "./utils/open.js";
 
