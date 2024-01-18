@@ -25,16 +25,16 @@ const allEpisodes = Array.from(allEpisodeElements).map((episodeElement) => {
 
 for (let i = 0; i < allEpisodes.length; i++) {
 	const sub = new URL(allEpisodes[i], url);
-	const response = await fetch(sub);
-	const html = await response.text();
+	// const response = await fetch(sub);
+	// const html = await response.text();
 
-	const dom = new JSDOM(html);
-	const document = dom.window.document;
+	// const dom = new JSDOM(html);
+	// const document = dom.window.document;
 
-	const downloadButton = document.querySelector("li.download a");
-	const downloadURL = downloadButton.href;
-
-	console.log("Opening episode", i + 1, "url:", downloadURL);
-	open(downloadURL);
+	// const downloadButton = document.querySelector("li.download a");
+	// const downloadURL = "https:" + downloadButton.href;
+	console.log("Opening episode", i + 1, "url:", sub.toString());
+	
+	open(sub.toString());
 	await sleep(1000);
 }
